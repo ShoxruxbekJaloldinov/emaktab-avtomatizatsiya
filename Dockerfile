@@ -1,22 +1,28 @@
-# Use the official Puppeteer image which comes with Chromium and all dependencies
-FROM ghcr.io/puppeteer/puppeteer:latest
+FROM node:20
 
-# Switch to root to copy files and install
-USER root
+# Install required dependencies for Puppeteer
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    procps \
+    libxss1 \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libgbm-dev \
+    libasound2 \
+    chromium \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
-
-# Install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy source code
 COPY . .
 
-# Switch back to the non-root user for security
-USER pptruser
+# Force Puppeteer to use the installed Chromium
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-# Expose port (Render sets PORT automatically, but default to 3000)
 EXPOSE 3000
-
-# Start the server
 CMD ["node", "server.js"]
