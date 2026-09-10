@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMaktab Hisobotlar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>eMaktab Jurnal Statistikasi</h1>
+            <p>O'qituvchilar hisobotini avtomatik yig'ish tizimi</p>
+        </header>
+
+        <div class="card controls-card">
+            <div class="date-controls">
+                <button id="prevBtn" class="btn secondary-btn" title="Oldingi kun">&larr; Oldingi kun</button>
+                
+                <div class="date-inputs">
+                    <div class="input-group">
+                        <label for="dateFrom">Boshlanish sanasi</label>
+                        <input type="date" id="dateFrom">
+                    </div>
+                    <div class="input-group">
+                        <label for="dateTo">Tugash sanasi</label>
+                        <input type="date" id="dateTo">
+                    </div>
+                </div>
+
+                <button id="nextBtn" class="btn secondary-btn" title="Keyingi kun">Keyingi kun &rarr;</button>
+            </div>
+            
+            <button id="startBtn" class="btn primary-btn">Hisobotni shakllantirish</button>
+        </div>
+
+        <div id="progressContainer" class="card progress-card hidden">
+            <h3 id="progressText">Jarayon boshlanmoqda...</h3>
+            <div class="progress-bar-wrapper">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            
+            <div id="captchaContainer" class="hidden" style="margin-top: 1.5rem;">
+                <p style="margin-bottom: 0.5rem; color: #ef4444; font-weight: 500;">Tizim Captcha (rasmdagi kod) so'ramoqda!</p>
+                <img id="captchaImage" src="" alt="Captcha" style="border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto; max-height: 100px;">
+                <div class="input-group" style="max-width: 300px; margin: 0 auto; display: flex; flex-direction: row; gap: 0.5rem;">
+                    <input type="text" id="captchaInput" placeholder="Kodni kiriting" style="flex: 1;">
+                    <button id="submitCaptchaBtn" class="btn primary-btn" style="width: auto;">Yuborish</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="card result-card hidden">
+            <div class="result-header">
+                <h2>Natijalar</h2>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="tgReportBtn" class="btn primary-btn" style="width: auto; background-color: #0088cc;">Telegram Hisobot</button>
+                    <button id="downloadBtn" class="btn outline-btn">JSON yuklab olish</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="resultTable">
+                    <thead>
+                        <tr>
+                            <th>O'qituvchi ism-sharifi</th>
+                            <th>Sinf</th>
+                            <th>Fan</th>
+                            <th>Ishtirokchilar</th>
+                            <th>Mavzularni to'ldirish foizi</th>
+                            <th>Uy vazifasi bo'yicha darslar foizi</th>
+                            <th>Uy vazifani o'z vaqtida berish %</th>
+                            <th>Rejalashtirishni yuritish, foizi</th>
+                            <th>Jurnalni yuritish, foizi</th>
+                            <th>Jurnalni o'z vaqtida yuritish, foizi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultBody">
+                        <!-- Data will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Telegram Report -->
+    <div id="tgModal" class="modal hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; display: flex; justify-content: center; align-items: center;">
+        <div class="card" style="width: 90%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="margin: 0;">Telegram Hisobot (Kamchiliklar)</h3>
+                <button id="closeTgModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <textarea id="tgReportText" style="flex: 1; min-height: 300px; width: 100%; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: monospace; resize: none; margin-bottom: 1rem;" readonly></textarea>
+            <button id="copyTgBtn" class="btn primary-btn" style="background-color: #0088cc;">Nusxa olish (Copy)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

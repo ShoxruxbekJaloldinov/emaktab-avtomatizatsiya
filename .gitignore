@@ -3,4 +3,5 @@ node_modules/
 .puppeteer/
 *.log
 *.png
-*.html
+login_page.html
+report_page.html
