@@ -16,7 +16,6 @@ async function runScraper(dateFrom, dateTo, onProgress) {
     const browser = await puppeteer.launch({
         headless: true, // Run in background
         defaultViewport: null,
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
         args: ['--start-maximized', '--no-sandbox', '--disable-setuid-sandbox']
     });
 

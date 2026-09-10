@@ -12,10 +12,6 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Set necessary environment variables for Puppeteer in Docker
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-
 # Switch back to the non-root user for security
 USER pptruser
 
